@@ -13,55 +13,61 @@ halve xs = (take n xs, drop n xs)
 -- maps the empty list to itself
 
 
-safetail :: [a] -> [a]
+safetailConditional :: [a] -> [a]
+safetailGuards :: [a] -> [a]
+safetailPatternMatching :: [a] -> [a]
 
 -- a) conditional
-safetail xs = if null xs
+safetailConditional xs = if null xs
   then []
   else tail xs
 
 -- b) guards
-safetail xs | null xs = []
+safetailGuards xs | null xs = []
             | otherwise = tail []
 
 -- c) pattern matching
-safetail [] = []
-safetail (x : xs) = xs
+safetailPatternMatching [] = []
+safetailPatternMatching (x : xs) = xs
 
 -- Question 3
 -- define v (or) in 4 ways using pattern matching
-v :: Bool -> Bool -> Bool
+or1 :: Bool -> Bool -> Bool
+or2 :: Bool -> Bool -> Bool
+or3 :: Bool -> Bool -> Bool
+or4 :: Bool -> Bool -> Bool
 
 -- 1
-v True True = True
-v True False = True
-v False True = True
-v False False = False
+True `or1` True = True
+True `or1` False = True
+False `or1` True = True
+False `or1` False = False
 
 -- 2
-v True _ = True
+True `or2` _ = True
 
 -- 3
-v a b = if a == b then a else True
+a `or3` b = if a == b then a else True
 
 -- 4
-v False False = False
-v _ _ = True
+False `or4` False = False
+_ `or4` _ = True
 
 -- Question 4
 -- define the following using a conditional expression
 -- True ∧ True = True
 -- _ ∧ _ = False
 
-(∧) :: Bool -> Bool -> Bool
-a ∧ b = if a == b && a == True then True else False
+and1 :: Bool -> Bool -> Bool
+a `and1` b = if a == b && a == True then True else False
 
 -- Question 5
 -- define the following using a conditional expression
 -- True ∧ b = b
 -- False ∧ _ = False
 
-a ∧ b = if a then b else False
+and2 :: Bool -> Bool -> Bool
+a `and2` b = if a then b else False
 
 -- Question 6
 -- show how the curried function definition
