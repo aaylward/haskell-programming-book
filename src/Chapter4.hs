@@ -74,6 +74,6 @@ a `and2` b = if a then b else False
 -- mult x y z = x * y *z 
 -- can be understood in terms of lambda expressions
 
-mult :: Int -> Int -> Int -> Int
-mult x y z = λx -> (λy -> (λz -> x * y * z))
+mult :: Num a => t -> t1 -> t2 -> a -> a -> a -> a
+mult x y z = (\ x -> (\ y -> (\ z -> x * y * z)))
 
